@@ -1,3 +1,3 @@
 # This is free and unencumbered software released into the public domain.
 
-require 'asimov/sdk'
+module ASIMOV; end
