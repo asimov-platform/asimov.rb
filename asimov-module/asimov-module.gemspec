@@ -1,8 +1,8 @@
 Gem::Specification.new do |gem|
-  gem.version            = File.read('VERSION').chomp
-  gem.date               = File.mtime('VERSION').strftime('%Y-%m-%d')
+  gem.version            = File.read('../VERSION').chomp
+  gem.date               = File.mtime('../VERSION').strftime('%Y-%m-%d')
 
-  gem.name               = "asimov-protocol"
+  gem.name               = "asimov-module"
   gem.homepage           = "https://sdk.asimov.so"
   gem.license            = "Unlicense"
   gem.summary            = "ASIMOV Software Development Kit (SDK) for Ruby"
@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.metadata           = {
     'bug_tracker_uri'   => "https://github.com/asimov-platform/asimov.rb/issues",
     'changelog_uri'     => "https://github.com/asimov-platform/asimov.rb/blob/master/CHANGES.md",
-    'documentation_uri' => "https://rubydoc.info/gems/asimov-protocol",
+    'documentation_uri' => "https://rubydoc.info/gems/asimov-module",
     'homepage_uri'      => gem.homepage,
     'source_code_uri'   => "https://github.com/asimov-platform/asimov.rb",
   }
@@ -19,7 +19,7 @@ Gem::Specification.new do |gem|
   gem.email              = "support@asimov.so"
 
   gem.platform           = Gem::Platform::RUBY
-  gem.files              = %w(AUTHORS CHANGES.md README.md UNLICENSE VERSION) + Dir.glob('lib/**/*.rb')
+  gem.files              = %w(../AUTHORS ../CHANGES.md ../README.md ../UNLICENSE ../VERSION) + Dir.glob('lib/**/*.rb')
   gem.bindir             = %q(bin)
   gem.executables        = %w()
 

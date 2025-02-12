@@ -1,3 +1,11 @@
 source "https://rubygems.org"
 
-gemspec
+gem "asimov.rb", path: "asimov"
+gem "asimov-construct", path: "asimov-construct"
+gem "asimov-dataset", path: "asimov-dataset"
+gem "asimov-flow", path: "asimov-flow"
+gem "asimov-module", path: "asimov-module"
+gem "asimov-ontology", path: "asimov-ontology"
+gem "asimov-protocol", path: "asimov-protocol"
+gem "asimov-sdk", path: "asimov-sdk"
+gem "asimov-vault", path: "asimov-vault"
