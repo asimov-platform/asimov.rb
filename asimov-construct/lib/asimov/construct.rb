@@ -29,6 +29,30 @@ end # KDL::Node
 
 class ASIMOV::Construct
   ##
+  # @example
+  #   ASIMOV::Construct.open("isaac.asimov") do |construct|
+  #     puts construct.system_prompt
+  #   end
+  #
+  # @param  [String, #to_s] id
+  # @yield [construct]
+  # @yieldparam [ASIMOV::Construct] construct
+  # @yieldreturn [Object]
+  # @return [ASIMOV::Construct] or `nil` if the construct does not exist
+  def self.open(id, &block)
+    result = self.parse(ASIMOV::Config.constructs_dir.join(id.to_s))
+    result = block.call(result) if block_given?
+    result
+  rescue Errno::ENOENT => error
+    nil
+  end
+
+  ##
+  # @example
+  #   ASIMOV::Construct.each do |construct|
+  #     puts construct.name
+  #   end
+  #
   # @yield [construct]
   # @return [Enumerator] if no block was given
   def self.each(&block)
