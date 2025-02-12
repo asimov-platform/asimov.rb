@@ -3,6 +3,29 @@
 require "asimov/config"
 require "kdl"
 
+class KDL::Document
+  def deconstruct
+    self.nodes
+  end
+
+  def deconstruct_keys(keys)
+    keys.inject({}) do |result, key|
+      result[key] = self[key]
+      result
+    end
+  end
+end # KDL::Document
+
+class KDL::Node
+  def deconstruct
+    self.children
+  end
+
+  def deconstruct_keys(keys)
+    {name:, arguments:, properties:, children:, type:}
+  end
+end # KDL::Node
+
 class ASIMOV::Construct
   ##
   # @yield [construct]
@@ -20,30 +43,29 @@ class ASIMOV::Construct
   # @param  [Pathname] path
   # @return [ASIMOV::Construct]
   def self.parse(path)
-    manifest = KDL.load_file(path.join("construct.kdl"))
-    manifest_root = manifest.nodes.first
-    case manifest_root.name
-      when "construct"
-        construct_id = manifest_root.arguments.first
-        construct_names, construct_links = {}, {}
-        manifest_root.children.each do |node|
-          case node.name
-            when "name", "names"
-              construct_names = node.children.inject({}) do |memo, node|
-                memo[node.name.to_sym] = node&.arguments&.first&.value
-                memo
+    manifest_path = path.join("construct.kdl")
+    manifest = KDL.load_file(manifest_path)
+    construct_kwargs = case manifest
+      in [{name: "construct", arguments: [construct_id], children:}]
+        children.inject({}) do |kwargs, node|
+          case node
+            in {name: "name", children:}
+              kwargs[:names] = children.inject({}) do |result, node|
+                result[node.name.to_sym] = node.arguments&.first&.value
+                result
               end
-            when "links"
-              construct_links = node.children.inject({}) do |memo, node|
-                memo[node.name.to_sym] = node&.arguments&.first&.value
-                memo
+            in {name: "links", children:}
+              kwargs[:links] = children.inject({}) do |result, node|
+                result[node.name.to_sym] = node.arguments&.first&.value
+                result
               end
           end
+          kwargs
         end
-        self.new(construct_id, names: construct_names, links: construct_links)
       else
-        raise ArgumentError, "invalid construct manifest: #{manifest_root.name}"
+        raise ArgumentError, "invalid construct manifest: #{manifest_path}"
     end
+    self.new(construct_id, **construct_kwargs)
   end
 
   ##
