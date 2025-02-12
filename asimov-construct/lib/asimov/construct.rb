@@ -1,6 +1,7 @@
 # This is free and unencumbered software released into the public domain.
 
 require "asimov/config"
+require "kdl"
 
 class ASIMOV::Construct
   ##
@@ -19,13 +20,40 @@ class ASIMOV::Construct
   # @param  [Pathname] path
   # @return [ASIMOV::Construct]
   def self.parse(path)
-    self.new(path.basename) # TODO
+    manifest = KDL.load_file(path.join("construct.kdl"))
+    manifest_root = manifest.nodes.first
+    case manifest_root.name
+      when "construct"
+        construct_id = manifest_root.arguments.first
+        construct_names, construct_links = {}, {}
+        manifest_root.children.each do |node|
+          case node.name
+            when "name", "names"
+              construct_names = node.children.inject({}) do |memo, node|
+                memo[node.name.to_sym] = node&.arguments&.first&.value
+                memo
+              end
+            when "links"
+              construct_links = node.children.inject({}) do |memo, node|
+                memo[node.name.to_sym] = node&.arguments&.first&.value
+                memo
+              end
+          end
+        end
+        self.new(construct_id, names: construct_names, links: construct_links)
+      else
+        raise ArgumentError, "invalid construct manifest: #{manifest_root.name}"
+    end
   end
 
   ##
   # @param  [String, #to_s] id
-  def initialize(id)
+  # @param  [Hash{Symbol => String}, #to_h] names
+  # @param  [Hash{Symbol => String}, #to_h] links
+  def initialize(id, names: {}, links: {})
     @id = id.to_s
+    @names = names.to_h
+    @links = links.to_h
   end
 
   ##
@@ -39,4 +67,13 @@ class ASIMOV::Construct
   ##
   # @return [String]
   attr_reader :name
+  def name; self.names[:en]; end
+
+  ##
+  # @return [Hash{Symbol => String}]
+  attr_reader :names
+
+  ##
+  # @return [Hash{Symbol => String}]
+  attr_reader :links
 end # ASIMOV::Construct
