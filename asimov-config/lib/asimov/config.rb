@@ -16,7 +16,7 @@ module ASIMOV::Config
   # @yieldparam [Pathname] path
   # @yieldreturn [void]
   # @return [Enumerator]
-  def self.each_construct(&block)
+  def self.each_construct_dir(&block)
     return enum_for(__method__) unless block_given?
     self.each_dir("constructs", &block)
   end
@@ -26,7 +26,7 @@ module ASIMOV::Config
   # @yieldparam [Pathname] path
   # @yieldreturn [void]
   # @return [Enumerator]
-  def self.each_module(&block)
+  def self.each_module_dir(&block)
     return enum_for(__method__) unless block_given?
     self.each_dir("modules", &block)
   end
@@ -41,6 +41,7 @@ module ASIMOV::Config
     return enum_for(__method__, parent) unless block_given?
     self.path.join(kind.to_s).each_child do |path|
       next if path.basename.to_s[0] == '.'
+      next if path.symlink? # omit aliases
       next unless path.directory?
       block.call(path)
     end
