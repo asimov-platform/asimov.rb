@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
   gem.bindir             = %q(bin)
   gem.executables        = %w()
 
-  gem.required_ruby_version = '>= 3.0'
+  gem.required_ruby_version = '>= 3.2'
   gem.add_development_dependency 'rake',  '>= 13'
   gem.add_development_dependency 'rspec', '>= 3.12'
   gem.add_development_dependency 'yard' , '>= 0.9'
