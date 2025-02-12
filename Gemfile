@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gem "asimov.rb", path: "asimov"
+gem "asimov-config", path: "asimov-config"
 gem "asimov-construct", path: "asimov-construct"
 gem "asimov-dataset", path: "asimov-dataset"
 gem "asimov-flow", path: "asimov-flow"

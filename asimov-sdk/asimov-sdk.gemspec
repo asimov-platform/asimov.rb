@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.metadata           = {
     'bug_tracker_uri'   => "https://github.com/asimov-platform/asimov.rb/issues",
     'changelog_uri'     => "https://github.com/asimov-platform/asimov.rb/blob/master/CHANGES.md",
-    'documentation_uri' => "https://rubydoc.info/gems/asimov-flow",
+    'documentation_uri' => "https://rubydoc.info/gems/asimov-sdk",
     'homepage_uri'      => gem.homepage,
     'source_code_uri'   => "https://github.com/asimov-platform/asimov.rb",
   }
@@ -27,5 +27,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rake',  '>= 13'
   gem.add_development_dependency 'rspec', '>= 3.12'
   gem.add_development_dependency 'yard' , '>= 0.9'
-  gem.add_runtime_dependency 'ffi', '~> 1.17'
+  gem.add_runtime_dependency     'asimov-config', gem.version
+  gem.add_runtime_dependency     'ffi', '~> 1.17'
 end

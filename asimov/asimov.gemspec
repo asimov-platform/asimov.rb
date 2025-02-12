@@ -27,13 +27,14 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rake',  '>= 13'
   gem.add_development_dependency 'rspec', '>= 3.12'
   gem.add_development_dependency 'yard' , '>= 0.9'
-  gem.add_runtime_dependency     'asimov-construct'
-  gem.add_runtime_dependency     'asimov-dataset'
-  gem.add_runtime_dependency     'asimov-flow'
-  gem.add_runtime_dependency     'asimov-module'
-  gem.add_runtime_dependency     'asimov-ontology'
-  gem.add_runtime_dependency     'asimov-protocol'
-  gem.add_runtime_dependency     'asimov-sdk'
-  gem.add_runtime_dependency     'asimov-vault'
+  gem.add_runtime_dependency     'asimov-config', gem.version
+  gem.add_runtime_dependency     'asimov-construct', gem.version
+  gem.add_runtime_dependency     'asimov-dataset', gem.version
+  gem.add_runtime_dependency     'asimov-flow', gem.version
+  gem.add_runtime_dependency     'asimov-module', gem.version
+  gem.add_runtime_dependency     'asimov-ontology', gem.version
+  gem.add_runtime_dependency     'asimov-protocol', gem.version
+  gem.add_runtime_dependency     'asimov-sdk', gem.version
+  gem.add_runtime_dependency     'asimov-vault', gem.version
   gem.add_runtime_dependency     'know'
 end

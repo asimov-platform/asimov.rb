@@ -2,6 +2,7 @@
 
 module ASIMOV; end
 
+require "asimov/config"
 require "asimov/construct"
 require "asimov/dataset"
 require "asimov/flow"
