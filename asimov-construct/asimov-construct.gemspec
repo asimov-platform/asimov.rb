@@ -29,4 +29,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'yard' , '>= 0.9'
   gem.add_runtime_dependency     'asimov-config', gem.version
   gem.add_runtime_dependency     'kdl', '~> 2.0'
+  gem.add_runtime_dependency     'pathname' , '>= 0.4'
 end

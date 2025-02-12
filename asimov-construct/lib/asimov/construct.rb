@@ -2,6 +2,7 @@
 
 require "asimov/config"
 require "kdl"
+require "pathname"
 
 class KDL::Document
   def deconstruct
@@ -65,17 +66,19 @@ class ASIMOV::Construct
       else
         raise ArgumentError, "invalid construct manifest: #{manifest_path}"
     end
-    self.new(construct_id, **construct_kwargs)
+    self.new(construct_id, path:, **construct_kwargs)
   end
 
   ##
   # @param  [String, #to_s] id
+  # @param  [Pathname] path
   # @param  [Hash{Symbol => String}, #to_h] names
   # @param  [Hash{Symbol => String}, #to_h] links
-  def initialize(id, names: {}, links: {})
-    @id = id.to_s
-    @names = names.to_h
-    @links = links.to_h
+  def initialize(id, path: nil, names: {}, links: {})
+    @id = id.to_s.freeze
+    @path = path ? Pathname(path).freeze : nil
+    @names = (names || {en: @id}).to_h.freeze
+    @links = (links || {}).to_h.freeze
   end
 
   ##
@@ -98,4 +101,10 @@ class ASIMOV::Construct
   ##
   # @return [Hash{Symbol => String}]
   attr_reader :links
+
+  ##
+  # @return [String]
+  def system_prompt
+    self.path.join("system.md").read.strip rescue nil
+  end
 end # ASIMOV::Construct
