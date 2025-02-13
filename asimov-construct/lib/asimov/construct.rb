@@ -58,7 +58,7 @@ class ASIMOV::Construct
   def self.each(&block)
     return enum_for(__method__) unless block_given?
     construct_dirs = ASIMOV::Config.each_construct_dir.to_a
-    construct_dirs.filter! { it.join("construct.kdl").readable? }
+    construct_dirs.filter! { _1.join("construct.kdl").readable? }
     construct_dirs.sort_by!(&:basename).each do |construct_path|
       block.call(self.parse(construct_path))
     end
@@ -130,5 +130,41 @@ class ASIMOV::Construct
   # @return [String]
   def system_prompt
     self.path.join("system.md").read.strip rescue nil
+  end
+
+  ##
+  # @return [String]
+  def to_h
+    {id:, names:, links:}
+  end
+
+  ##
+  # @return [KDL::Document]
+  def to_kdl
+    require "kdl"
+    KDL::Document.new([
+      KDL::Node.new("construct", arguments: [self.id], children: [
+        KDL::Node.new("name", children: self.names.map do |k, v|
+          KDL::Node.new(k.to_s, arguments: [v])
+        end),
+        KDL::Node.new("links", children: self.links.map do |k, v|
+          KDL::Node.new(k.to_s, arguments: [v])
+        end),
+      ]),
+    ])
+  end
+
+  ##
+  # @return [String]
+  def to_json
+    require "json"
+    JSON.pretty_generate(self.to_h)
+  end
+
+  ##
+  # @return [String]
+  def to_yaml
+    require "yaml"
+    YAML.dump(self.to_h, stringify_names: true)
   end
 end # ASIMOV::Construct
