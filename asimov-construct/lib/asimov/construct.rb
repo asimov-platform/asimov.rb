@@ -30,6 +30,64 @@ end # KDL::Node
 class ASIMOV::Construct
   ##
   # @example
+  #   p ASIMOV::Construct.count
+  #
+  # @return [Integer]
+  def self.count
+    self.each.count
+  end
+
+  ##
+  # @example
+  #   p ASIMOV::Construct.ids
+  #
+  # @return [Array<String>]
+  def self.ids
+    self.each.map(&:id).to_a
+  end
+
+  ##
+  # @example
+  #   ASIMOV::Construct.list(prefix: "isaac") do |construct|
+  #     puts construct.name
+  #   end
+  #
+  # @example
+  #   p ASIMOV::Construct.list(prefix: "isaac").to_a
+  #
+  # @param  [String, #to_s] prefix
+  # @yield [construct]
+  # @yieldparam [ASIMOV::Construct] construct
+  # @yieldreturn [void]
+  # @return [Enumerator] if no block was given
+  def self.list(prefix: nil, &block)
+    return enum_for(__method__, prefix:) unless block_given?
+    result = self.each
+    result = result.filter { _1.id.start_with?(prefix.to_s) } if prefix
+    result.each(&block)
+  end
+
+  ##
+  # @example
+  #   ASIMOV::Construct.each do |construct|
+  #     puts construct.name
+  #   end
+  #
+  # @yield [construct]
+  # @yieldparam [ASIMOV::Construct] construct
+  # @yieldreturn [void]
+  # @return [Enumerator] if no block was given
+  def self.each(&block)
+    return enum_for(__method__) unless block_given?
+    construct_dirs = ASIMOV::Config.each_construct_dir.to_a
+    construct_dirs.filter! { _1.join("construct.kdl").readable? }
+    construct_dirs.sort_by!(&:basename).each do |construct_path|
+      block.call(self.parse(construct_path))
+    end
+  end
+
+  ##
+  # @example
   #   ASIMOV::Construct.open("isaac.asimov") do |construct|
   #     puts construct.system_prompt
   #   end
@@ -49,26 +107,12 @@ class ASIMOV::Construct
 
   ##
   # @example
-  #   ASIMOV::Construct.each do |construct|
-  #     puts construct.name
-  #   end
+  #   ASIMOV::Construct.parse("asimov-constructs/isaac.asimov")
   #
-  # @yield [construct]
-  # @return [Enumerator] if no block was given
-  def self.each(&block)
-    return enum_for(__method__) unless block_given?
-    construct_dirs = ASIMOV::Config.each_construct_dir.to_a
-    construct_dirs.filter! { _1.join("construct.kdl").readable? }
-    construct_dirs.sort_by!(&:basename).each do |construct_path|
-      block.call(self.parse(construct_path))
-    end
-  end
-
-  ##
-  # @param  [Pathname] path
+  # @param  [Pathname, #to_s] path
   # @return [ASIMOV::Construct]
   def self.parse(path)
-    manifest_path = path.join("construct.kdl")
+    manifest_path = Pathname(path).join("construct.kdl")
     manifest = KDL.load_file(manifest_path)
     construct_kwargs = case manifest
       in [{name: "construct", arguments: [construct_id], children:}]
