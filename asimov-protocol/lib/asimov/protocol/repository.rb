@@ -2,4 +2,5 @@
 
 ##
 # A repository of datasets on the ASIMOV Protocol.
-class ASIMOV::Protocol::Repository; end
+class ASIMOV::Protocol::Repository
+end # ASIMOV::Protocol::Repository

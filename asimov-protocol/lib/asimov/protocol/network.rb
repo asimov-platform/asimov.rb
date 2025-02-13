@@ -2,4 +2,5 @@
 
 ##
 # A blockchain network supported by ASIMOV Protocol.
-class ASIMOV::Protocol::Network; end
+class ASIMOV::Protocol::Network
+end # ASIMOV::Protocol::Network

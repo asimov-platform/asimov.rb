@@ -2,4 +2,5 @@
 
 ##
 # A dataset of knowledge graphs on the ASIMOV Protocol.
-class ASIMOV::Protocol::Dataset; end
+class ASIMOV::Protocol::Dataset
+end # ASIMOV::Protocol::Dataset

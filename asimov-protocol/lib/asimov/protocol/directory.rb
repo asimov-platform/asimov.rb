@@ -2,4 +2,5 @@
 
 ##
 # The directory of datasets on the ASIMOV Protocol.
-class ASIMOV::Protocol::Directory; end
+class ASIMOV::Protocol::Directory
+end # ASIMOV::Protocol::Directory
