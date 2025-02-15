@@ -98,7 +98,8 @@ class ASIMOV::Construct
   # @yieldreturn [Object]
   # @return [ASIMOV::Construct] or `nil` if the construct does not exist
   def self.open(id, &block)
-    result = self.parse(ASIMOV::Config.constructs_dir.join(id.to_s))
+    id = id.is_a?(self.class) ? id.id : id.to_s
+    result = self.parse(ASIMOV::Config.constructs_dir.join(id))
     result = block.call(result) if block_given?
     result
   rescue Errno::ENOENT => error
