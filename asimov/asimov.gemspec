@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
-  gem.version            = File.read('../VERSION').chomp
-  gem.date               = File.mtime('../VERSION').strftime('%Y-%m-%d')
+  gem.version            = File.read('VERSION').chomp
+  gem.date               = File.mtime('VERSION').strftime('%Y-%m-%d')
 
   gem.name               = "asimov.rb"
   gem.homepage           = "https://sdk.asimov.so"
@@ -19,7 +19,7 @@ Gem::Specification.new do |gem|
   gem.email              = "support@asimov.so"
 
   gem.platform           = Gem::Platform::RUBY
-  gem.files              = %w(../AUTHORS ../CHANGES.md ../README.md ../UNLICENSE ../VERSION) + Dir.glob('lib/**/*.rb')
+  gem.files              = %w(AUTHORS CHANGES.md README.md UNLICENSE VERSION) + Dir.glob('lib/**/*.rb')
   gem.bindir             = %q(bin)
   gem.executables        = %w()
 
