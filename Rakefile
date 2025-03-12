@@ -6,6 +6,18 @@ VERSION = File.read('VERSION').chomp
 
 task default: %w(release:prep)
 
+namespace :gems do
+  task :list do
+    gems.each { |gem| puts gem.name }
+  end
+
+  task :yank do
+    gems.each do |gem|
+      warn `gem yank #{gem.name} -v 25.0.0.dev.3`
+    end
+  end
+end
+
 namespace :release do
   task :prep do
     gems.each do |gem|
@@ -30,6 +42,9 @@ def gems
   require 'pathname'
   gem = Struct.new(:name, :path)
   GEM_PATHS.map { Pathname(it) }.filter_map do
-    gem.new(it.basename.to_s, it) if it.directory? && it.join('VERSION').exist?
+    return nil unless it.directory? && it.join('VERSION').exist?
+    gem_name = it.basename.to_s
+    gem_name = 'asimov.rb' if gem_name == 'asimov'
+    gem.new(gem_name, it)
   end
 end
