@@ -1,7 +1,7 @@
 # ASIMOV Software Development Kit (SDK) for Ruby
 
 [![License](https://img.shields.io/badge/license-Public%20Domain-blue.svg)](https://unlicense.org)
-[![Compatibility](https://img.shields.io/badge/ruby-3.2%2B-blue)](https://rubygems.org/gems/asimov.rb)
+[![Compatibility](https://img.shields.io/badge/ruby-3.2%2B-blue)](https://endoflife.date/ruby)
 [![Package](https://img.shields.io/gem/v/asimov.rb)](https://rubygems.org/gems/asimov.rb)
 [![Documentation](https://img.shields.io/badge/rubydoc-latest-blue)](https://rubydoc.info/gems/asimov.rb)
 
