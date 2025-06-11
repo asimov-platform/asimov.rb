@@ -2,7 +2,7 @@ Gem::Specification.new do |gem|
   gem.version            = File.read('VERSION').chomp
   gem.date               = File.mtime('VERSION').strftime('%Y-%m-%d')
 
-  gem.name               = "asimov.rb"
+  gem.name               = "asimov-runner"
   gem.homepage           = "https://sdk.asimov.so"
   gem.license            = "Unlicense"
   gem.summary            = "ASIMOV Software Development Kit (SDK) for Ruby"
@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.metadata           = {
     'bug_tracker_uri'   => "https://github.com/asimov-platform/asimov.rb/issues",
     'changelog_uri'     => "https://github.com/asimov-platform/asimov.rb/blob/master/CHANGES.md",
-    'documentation_uri' => "https://rubydoc.info/gems/asimov.rb",
+    'documentation_uri' => "https://rubydoc.info/gems/asimov-runner",
     'homepage_uri'      => gem.homepage,
     'source_code_uri'   => "https://github.com/asimov-platform/asimov.rb",
   }
@@ -28,14 +28,4 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rspec', '>= 3.12'
   gem.add_development_dependency 'yard' , '>= 0.9'
   gem.add_runtime_dependency     'asimov-config', gem.version
-  gem.add_runtime_dependency     'asimov-construct', gem.version
-  gem.add_runtime_dependency     'asimov-dataset', gem.version
-  gem.add_runtime_dependency     'asimov-flow', gem.version
-  gem.add_runtime_dependency     'asimov-module', gem.version
-  gem.add_runtime_dependency     'asimov-ontology', gem.version
-  gem.add_runtime_dependency     'asimov-protocol', gem.version
-  gem.add_runtime_dependency     'asimov-runner', gem.version
-  gem.add_runtime_dependency     'asimov-sdk', gem.version
-  gem.add_runtime_dependency     'asimov-vault', gem.version
-  gem.add_runtime_dependency     'know'
 end
