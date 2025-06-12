@@ -61,3 +61,5 @@ module ASIMOV::Config
     end
   end
 end # ASIMOV::Config
+
+require_relative "config/module_manifest"
