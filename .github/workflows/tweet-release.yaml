@@ -13,6 +13,6 @@ jobs:
     uses: asimov-platform/.github/.github/workflows/tweet.yaml@master
     with:
       message: |
-        📦 ${{ github.event.repository.name }} ${{ github.event.release.tag_name }} has been released:
+        📦 ASIMOV Software Development Kit (SDK) for Ruby ${{ github.event.release.tag_name }} has been released:
         ${{ github.event.release.html_url }}
     secrets: inherit
