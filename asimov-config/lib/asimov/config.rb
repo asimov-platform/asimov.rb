@@ -4,6 +4,8 @@ require "pathname"
 
 module ASIMOV; end
 
+##
+# ASIMOV configuration.
 module ASIMOV::Config
   ##
   # @return [Pathname]
@@ -62,4 +64,5 @@ module ASIMOV::Config
   end
 end # ASIMOV::Config
 
+require_relative "config/resolver"
 require_relative "config/module_manifest"
