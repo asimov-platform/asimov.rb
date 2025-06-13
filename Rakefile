@@ -22,6 +22,7 @@ namespace :release do
   task :prep do
     gems.each do |gem|
       `#{RSYNC} -a #{GEM_ASSETS.join(' ')} #{gem.path}/`
+      `git add #{gem.path}/{#{GEM_ASSETS.join(',')}}`
     end
   end
 
