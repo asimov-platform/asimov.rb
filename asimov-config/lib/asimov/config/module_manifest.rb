@@ -53,6 +53,15 @@ class ASIMOV::Config::ModuleManifest
   def handles() @yaml[:handles] end
 
   ##
+  # @return [Boolean]
+  def handles?
+    @yaml[:handles].is_a?(Hash) &&
+      %i[url_protocols url_prefixes url_patterns].any? do |key|
+        !(@yaml[:handles][key].nil? || @yaml[:handles][key].empty?)
+      end
+  end
+
+  ##
   # @param [Hash{Symbol => Object}] yaml
   # @return [void]
   def initialize(yaml)
