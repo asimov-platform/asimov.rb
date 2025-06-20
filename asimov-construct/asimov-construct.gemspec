@@ -3,7 +3,7 @@ Gem::Specification.new do |gem|
   gem.date               = File.mtime('VERSION').strftime('%Y-%m-%d')
 
   gem.name               = "asimov-construct"
-  gem.homepage           = "https://sdk.asimov.so"
+  gem.homepage           = "https://sdk.asimov.sh"
   gem.license            = "Unlicense"
   gem.summary            = "ASIMOV Software Development Kit (SDK) for Ruby"
   gem.description        = ""
@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   }
 
   gem.author             = "ASIMOV Protocol"
-  gem.email              = "support@asimov.so"
+  gem.email              = "support@asimov.systems"
 
   gem.platform           = Gem::Platform::RUBY
   gem.files              = %w(AUTHORS CHANGES.md README.md UNLICENSE VERSION) + Dir.glob('lib/**/*.rb')

@@ -5,6 +5,8 @@
 [![Package](https://img.shields.io/gem/v/asimov.rb)](https://rubygems.org/gems/asimov.rb)
 [![Documentation](https://img.shields.io/badge/rubydoc-latest-blue)](https://rubydoc.info/gems/asimov.rb)
 
+[ASIMOV] is a polyglot development platform for trustworthy, neurosymbolic AI.
+
 🚧 _We are building in public. This is presently under heavy construction._
 
 ## ✨ Features
@@ -50,4 +52,5 @@ git clone https://github.com/asimov-platform/asimov.rb.git
 [![Share on Hacker News](https://img.shields.io/badge/share%20on-hacker%20news-orange?logo=ycombinator)](https://news.ycombinator.com/submitlink?u=https://github.com/asimov-platform/asimov.rb&t=ASIMOV%20Software%20Development%20Kit%20%28SDK%29%20for%20Ruby)
 [![Share on Facebook](https://img.shields.io/badge/share%20on-facebook-1976D2?logo=facebook)](https://www.facebook.com/sharer/sharer.php?u=https://github.com/asimov-platform/asimov.rb)
 
+[ASIMOV]: https://asimov.sh
 [Ruby]: https://ruby-lang.org
